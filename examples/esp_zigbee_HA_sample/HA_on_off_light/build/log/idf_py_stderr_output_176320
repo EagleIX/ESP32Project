@@ -1,0 +1,23 @@
+Command: cmake -G Ninja -B /home/eagle/ESP32Project/examples/esp_zigbee_HA_sample/HA_on_off_light/build -DPYTHON_DEPS_CHECKED=1 -DPYTHON=/home/eagle/.espressif/python_env/idf6.1_py3.12_env/bin/python -DESP_PLATFORM=1 -DCCACHE_ENABLE=False /home/eagle/ESP32Project/examples/esp_zigbee_HA_sample/HA_on_off_light
+Configuration Report                                                                                           
+ ───────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+   Parser Version: 1                                                                                           
+   Verbosity: default                                                                                          
+   Defaults policy: sdkconfig                                                                                  
+   Status: Finished with notifications                                                                         
+                                                                                                               
+  Disabled Symbols/Choices With User-Set Value                                                                 
+   ─────────────────────────────────────────────────────────────────────────────────────────────────────────   
+    * PARTITION_TABLE_FILENAME (defined at                                                                     
+    /home/eagle/esp/esp-idf/components/partition_table/Kconfig.projbuild:137) with user-set value              
+    partitions.csv from /tmp/kconfgen_tmpiw66rmhc                                                              
+   ─────────────────────────────────────────────────────────────────────────────────────────────────────────   
+ ───────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+12f36a021f-c38fc98-1.6.4-2026-03-18 10:55:37 UTC
+CMake Error at /home/eagle/esp/esp-idf/tools/cmake/component.cmake:289 (message):
+  SRC_DIRS entry '../../../common/zcl_utility/src' does not exist.
+Call Stack (most recent call first):
+  /home/eagle/esp/esp-idf/tools/cmake/component.cmake:458 (__component_add_sources)
+  main/CMakeLists.txt:1 (idf_component_register)
+
+

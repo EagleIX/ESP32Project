@@ -1,0 +1,81 @@
+Command: /home/eagle/.espressif/python_env/idf6.1_py3.12_env/bin/python /home/eagle/esp/esp-idf/tools/idf_monitor.py -p /dev/ttyACM0 -b 115200 --toolchain-prefix riscv32-esp-elf- --target esp32c6 --revision 0 --decode-panic backtrace /home/eagle/ESP32Project/examples/esp_zigbee_HA_sample/HA_on_off_light/build/on_off_light_bulb.elf /home/eagle/ESP32Project/examples/esp_zigbee_HA_sample/HA_on_off_light/build/bootloader/bootloader.elf -m '/home/eagle/.espressif/python_env/idf6.1_py3.12_env/bin/python' '/home/eagle/esp/esp-idf/tools/idf.py' '-p' '/dev/ttyACM0'
+ESP-ROM:esp32c6-20220919
+Build:Sep 19 2022
+rst:0x1 (POWERON),boot:0xc (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:2
+load:0x40875730,len:0x16f0
+load:0x4086b910,len:0xedc
+load:0x4086e610,len:0x31f8
+entry 0x4086b91a
+[0;32mI (23) boot: ESP-IDF v6.1-dev-2938-g12f36a021f 2nd stage bootloader[0m
+[0;32mI (24) boot: compile time Mar 18 2026 13:59:29[0m
+[0;32mI (24) boot: chip revision: v0.2[0m
+[0;32mI (25) boot: efuse block revision: v0.3[0m
+[0;32mI (29) boot.esp32c6: SPI Speed      : 80MHz[0m
+[0;32mI (33) boot.esp32c6: SPI Mode       : DIO[0m
+[0;32mI (36) boot.esp32c6: SPI Flash Size : 2MB[0m
+[0;32mI (40) boot: Enabling RNG early entropy source...[0m
+[0;32mI (45) boot: Partition Table:[0m
+[0;32mI (47) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (54) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (60) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (67) boot:  2 factory          factory app      00 00 00010000 000e1000[0m
+[0;32mI (73) boot:  3 zb_storage       Unknown data     01 81 000f1000 00004000[0m
+[0;32mI (80) boot:  4 zb_fct           Unknown data     01 81 000f5000 00000400[0m
+[0;32mI (86) boot: End of partition table[0m
+[0;32mI (89) esp_image: segment 0: paddr=00010020 vaddr=42060020 size=0ec68h ( 60520) map[0m
+[0;32mI (108) esp_image: segment 1: paddr=0001ec90 vaddr=40800000 size=01388h (  5000) load[0m
+[0;32mI (110) esp_image: segment 2: paddr=00020020 vaddr=42000020 size=59ff8h (368632) map[0m
+[0;32mI (181) esp_image: segment 3: paddr=0007a020 vaddr=40801388 size=0d464h ( 54372) load[0m
+[0;32mI (193) esp_image: segment 4: paddr=0008748c vaddr=4080e7f0 size=02bfch ( 11260) load[0m
+[0;32mI (200) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (200) boot: Disabling RNG early entropy source...[0m
+[0;32mI (211) cpu_start: Unicore app[0m
+[0;32mI (219) cpu_start: GPIO 17 and 16 are used as console UART I/O pins[0m
+[0;32mI (220) cpu_start: Pro cpu start user code[0m
+[0;32mI (220) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (222) app_init: Application information:[0m
+[0;32mI (226) app_init: Project name:     on_off_light_bulb[0m
+[0;32mI (230) app_init: App version:      c38fc98[0m
+[0;32mI (234) app_init: Compile time:     Mar 18 2026 13:59:39[0m
+[0;32mI (239) app_init: ELF file SHA256:  d05c46b6d...[0m
+[0;32mI (244) app_init: ESP-IDF:          v6.1-dev-2938-g12f36a021f[0m
+[0;32mI (249) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (253) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (257) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (261) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (267) heap_init: At 40815800 len 00066E10 (411 KiB): RAM[0m
+[0;32mI (272) heap_init: At 4087C610 len 00002F54 (11 KiB): RAM[0m
+[0;32mI (277) heap_init: At 50000000 len 00003FE8 (15 KiB): RTCRAM[0m
+[0;33mW (283) spi_flash: Detected boya flash chip but using generic driver. For optimal functionality, enable `SPI_FLASH_SUPPORT_BOYA_CHIP` in menuconfig[0m
+[0;32mI (296) spi_flash: detected chip: generic[0m
+[0;32mI (299) spi_flash: flash io: dio[0m
+[0;33mW (302) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (315) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (321) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (328) coexist: coex firmware version: 093e3d2[0m
+[0;32mI (332) coexist: coexist rom version 5b8dcfa[0m
+[0;32mI (336) main_task: Started on CPU0[0m
+[0;32mI (336) main_task: Calling app_main()[0m
+[0;32mI (346) phy_init: phy_version 343,b513b46,Nov 14 2025,16:34:12[0m
+[0;32mI (426) phy: libbtbb version: c493933, Nov 14 2025, 16:34:25[0m
+[0;32mI (446) main_task: Returned from app_main()[0m
+[0;32mI (456) ESP_ZB_ON_OFF_LIGHT: ZDO signal: ZDO Config Ready (0x17), status: ESP_FAIL[0m
+[0;32mI (456) ESP_ZB_ON_OFF_LIGHT: Initialize Zigbee stack[0m
+[0;32mI (2826) ESP_ZB_ON_OFF_LIGHT: Deferred driver initialization successful[0m
+[0;32mI (2826) ESP_ZB_ON_OFF_LIGHT: Device started up in non factory-reset mode[0m
+[0;32mI (2826) ESP_ZB_ON_OFF_LIGHT: Device rebooted[0m
+[0;33mW (2996) ESP_ZB_ON_OFF_LIGHT: Receive Zigbee action(0x1005) callback[0m
+[0;32mI (11996) ESP_ZB_ON_OFF_LIGHT: Received message: endpoint(10), cluster(0x6), attribute(0x0), data size(1)[0m
+[0;32mI (11996) ESP_ZB_ON_OFF_LIGHT: Light sets to On[0m
+[0;33mW (12026) ESP_ZB_ON_OFF_LIGHT: Receive Zigbee action(0x1005) callback[0m
+[0;32mI (13016) ESP_ZB_ON_OFF_LIGHT: Received message: endpoint(10), cluster(0x6), attribute(0x0), data size(1)[0m
+[0;32mI (13016) ESP_ZB_ON_OFF_LIGHT: Light sets to Off[0m
+[0;33mW (13046) ESP_ZB_ON_OFF_LIGHT: Receive Zigbee action(0x1005) callback[0m
+[0;32mI (16216) ESP_ZB_ON_OFF_LIGHT: Received message: endpoint(10), cluster(0x6), attribute(0x0), data size(1)[0m
+[0;32mI (16216) ESP_ZB_ON_OFF_LIGHT: Light sets to On[0m
+[0;33mW (16246) ESP_ZB_ON_OFF_LIGHT: Receive Zigbee action(0x1005) callback[0m
+[0;32mI (17416) ESP_ZB_ON_OFF_LIGHT: Received message: endpoint(10), cluster(0x6), attribute(0x0), data size(1)[0m
+[0;32mI (17416) ESP_ZB_ON_OFF_LIGHT: Light sets to Off[0m
+[0;33mW (17466) ESP_ZB_ON_OFF_LIGHT: Receive Zigbee action(0x1005) callback[0m

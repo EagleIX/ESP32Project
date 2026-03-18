@@ -1,0 +1,2 @@
+source /home/eagle/ESP32Project/examples/esp_zigbee_HA_sample/HA_on_off_light/build/bootloader/gdbinit/symbols
+source /home/eagle/ESP32Project/examples/esp_zigbee_HA_sample/HA_on_off_light/build/bootloader/gdbinit/connect

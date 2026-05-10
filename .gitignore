@@ -1,0 +1,30 @@
+# Игнорируем сгенерированные и временные файлы
+build/
+managed_components/
+sdkconfig
+sdkconfig.old
+dependencies.lock
+
+
+repomix-output.xml
+
+# Системные файлы
+.DS_Store
+*.swp
+*.swo
+*~
+
+# VSCode
+.vscode/
+
+# Eclipse / IDEA
+.cproject
+.project
+.idea/
+*.iml
+
+# Python
+__pycache__/
+*.pyc
+
+docs/

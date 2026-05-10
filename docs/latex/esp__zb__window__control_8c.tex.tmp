@@ -1,0 +1,385 @@
+\doxysection{main/esp\+\_\+zb\+\_\+window\+\_\+control.c File Reference}
+\hypertarget{esp__zb__window__control_8c}{}\label{esp__zb__window__control_8c}\index{main/esp\_zb\_window\_control.c@{main/esp\_zb\_window\_control.c}}
+{\ttfamily \#include "{}freertos/\+Free\+RTOS.\+h"{}}\newline
+{\ttfamily \#include "{}freertos/task.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+check.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+log.\+h"{}}\newline
+{\ttfamily \#include "{}nvs\+\_\+flash.\+h"{}}\newline
+{\ttfamily \#include "{}ha/esp\+\_\+zigbee\+\_\+ha\+\_\+standard.\+h"{}}\newline
+{\ttfamily \#include "{}esp\+\_\+zb\+\_\+window\+\_\+control.\+h"{}}\newline
+{\ttfamily \#include "{}servo\+\_\+driver.\+h"{}}\newline
+Include dependency graph for esp\+\_\+zb\+\_\+window\+\_\+control.\+c\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__zb__window__control_8c_aec58b5da611b5e0e3f7492352ac9e975}{deferred\+\_\+driver\+\_\+init}} (void)
+\begin{DoxyCompactList}\small\item\em Отложенная инициализация драйвера освещения. Вызывается после того, как Zigbee стек сообщил об успешном старте устройства. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{esp__zb__window__control_8c_a455f38ce1e4241e576dc67dab2d6b674}{bdb\+\_\+start\+\_\+top\+\_\+level\+\_\+commissioning\+\_\+cb}} (uint8\+\_\+t mode\+\_\+mask)
+\begin{DoxyCompactList}\small\item\em Функция обратного вызова (callback) для повторного запуска процедуры ввода в сеть (commissioning). Используется вместе с esp\+\_\+zb\+\_\+scheduler\+\_\+alarm для повторных попыток. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{esp__zb__window__control_8c_a8d77d98462eb51ae5bad45c1198c195f}{esp\+\_\+zb\+\_\+app\+\_\+signal\+\_\+handler}} (esp\+\_\+zb\+\_\+app\+\_\+signal\+\_\+t \texorpdfstring{$\ast$}{*}signal\+\_\+struct)
+\begin{DoxyCompactList}\small\item\em Главный обработчик сигналов (событий) Zigbee стека. Регистрируется автоматически при инициализации; вызывается при изменении состояния сети, комиссионировании и т.\+д. \end{DoxyCompactList}\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__zb__window__control_8c_ad4e8386186e0759d2fc336c78d02c8a6}{zb\+\_\+attribute\+\_\+handler}} (const esp\+\_\+zb\+\_\+zcl\+\_\+window\+\_\+covering\+\_\+movement\+\_\+message\+\_\+t \texorpdfstring{$\ast$}{*}message)
+\begin{DoxyCompactList}\small\item\em Обработчик события изменения атрибута (Set Attribute Value). Вызывается, когда координатор или другое устройство записывает значение в атрибут нашего кластера. \end{DoxyCompactList}\item 
+static esp\+\_\+err\+\_\+t \mbox{\hyperlink{esp__zb__window__control_8c_ab9dcf11833c207d5411024fb85c980ce}{zb\+\_\+action\+\_\+handler}} (esp\+\_\+zb\+\_\+core\+\_\+action\+\_\+callback\+\_\+id\+\_\+t callback\+\_\+id, const void \texorpdfstring{$\ast$}{*}message)
+\begin{DoxyCompactList}\small\item\em Диспетчер действий (action handler) для всех callback-\/событий Zigbee Core. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{esp__zb__window__control_8c_a2dc519d60ebab8d2cd598bbc436b9cc1}{esp\+\_\+zb\+\_\+task}} (void \texorpdfstring{$\ast$}{*}pv\+Parameters)
+\begin{DoxyCompactList}\small\item\em Задача Free\+RTOS, в которой работает весь Zigbee стек. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{esp__zb__window__control_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}{app\+\_\+main}} (void)
+\begin{DoxyCompactList}\small\item\em Главная функция приложения (точка входа в программу на ESP-\/\+IDF). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}} = "{}HA\+\_\+\+ESP\+\_\+\+WINDOW\+\_\+\+COVEWRING"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{esp__zb__window__control_8c_a630544a7f0a2cc40d8a7fefab7e2fe70}\label{esp__zb__window__control_8c_a630544a7f0a2cc40d8a7fefab7e2fe70} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!app\_main@{app\_main}}
+\index{app\_main@{app\_main}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{app\_main()}{app\_main()}}
+{\footnotesize\ttfamily void app\+\_\+main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Главная функция приложения (точка входа в программу на ESP-\/\+IDF). 
+
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00251}{251}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00252\ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{comment}{//\ Конфигурация\ платформы\ Zigbee:\ используется\ встроенный\ радиочип\ и\ прямое\ управление\ (без\ внешнего\ хоста)}}
+\DoxyCodeLine{00254\ \ \ \ \ esp\_zb\_platform\_config\_t\ config\ =\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ .radio\_config\ =\ \mbox{\hyperlink{esp__zb__window__control_8h_a4c3f2cd69b76dafc08ea29d5085e32a2}{ESP\_ZB\_DEFAULT\_RADIO\_CONFIG}}(),\textcolor{comment}{//\ радио\ в\ нативном\ режиме}}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ .host\_config\ =\ \mbox{\hyperlink{esp__zb__window__control_8h_a4a26cc1a170531a16fb36922f5e8a1df}{ESP\_ZB\_DEFAULT\_HOST\_CONFIG}}(),\textcolor{comment}{//\ соединение\ отсутствует\ (стек\ работает\ на\ самом\ ESP)}}
+\DoxyCodeLine{00257\ \ \ \ \ \};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{comment}{//\ Инициализация\ NVS\ (необходима\ для\ хранения\ ключей,\ параметров\ сети\ Zigbee)}}
+\DoxyCodeLine{00260\ \ \ \ \ ESP\_ERROR\_CHECK(nvs\_flash\_init());}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{comment}{//\ Применение\ платформенной\ конфигурации}}
+\DoxyCodeLine{00262\ \ \ \ \ ESP\_ERROR\_CHECK(esp\_zb\_platform\_config(\&config));}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{comment}{//\ Создаём\ задачу\ FreeRTOS\ для\ работы\ Zigbee\ стека\ (стек\ задачи:\ 4096\ байт,\ приоритет\ 5)}}
+\DoxyCodeLine{00264\ \ \ \ \ xTaskCreate(\mbox{\hyperlink{esp__zb__window__control_8c_a2dc519d60ebab8d2cd598bbc436b9cc1}{esp\_zb\_task}},\ \textcolor{stringliteral}{"{}Zigbee\_main"{}},\ 4096,\ NULL,\ 5,\ NULL);}
+\DoxyCodeLine{00265\ \}}
+
+\end{DoxyCode}
+\Hypertarget{esp__zb__window__control_8c_a455f38ce1e4241e576dc67dab2d6b674}\label{esp__zb__window__control_8c_a455f38ce1e4241e576dc67dab2d6b674} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!bdb\_start\_top\_level\_commissioning\_cb@{bdb\_start\_top\_level\_commissioning\_cb}}
+\index{bdb\_start\_top\_level\_commissioning\_cb@{bdb\_start\_top\_level\_commissioning\_cb}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{bdb\_start\_top\_level\_commissioning\_cb()}{bdb\_start\_top\_level\_commissioning\_cb()}}
+{\footnotesize\ttfamily static void bdb\+\_\+start\+\_\+top\+\_\+level\+\_\+commissioning\+\_\+cb (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{mode\+\_\+mask }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Функция обратного вызова (callback) для повторного запуска процедуры ввода в сеть (commissioning). Используется вместе с esp\+\_\+zb\+\_\+scheduler\+\_\+alarm для повторных попыток. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mode\+\_\+mask} & Режим комиссионирования (например, ESP\+\_\+\+ZB\+\_\+\+BDB\+\_\+\+MODE\+\_\+\+NETWORK\+\_\+\+STEERING) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00059}{59}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ ESP\_RETURN\_ON\_FALSE\ проверяет\ условие,\ при\ ложности\ –\ логирует\ ошибку\ и\ выходит.}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ Здесь\ просто\ запускается\ верхнеуровневая\ комиссионирование\ без\ проверки\ возврата\ (пустое\ тело\ для\ "{};"{}).}}
+\DoxyCodeLine{00063\ \ \ \ \ ESP\_RETURN\_ON\_FALSE(esp\_zb\_bdb\_start\_top\_level\_commissioning(mode\_mask)\ ==\ ESP\_OK,\ ,\ \mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Failed\ to\ start\ Zigbee\ commissioning"{}});}
+\DoxyCodeLine{00064\ \}}
+
+\end{DoxyCode}
+\Hypertarget{esp__zb__window__control_8c_aec58b5da611b5e0e3f7492352ac9e975}\label{esp__zb__window__control_8c_aec58b5da611b5e0e3f7492352ac9e975} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!deferred\_driver\_init@{deferred\_driver\_init}}
+\index{deferred\_driver\_init@{deferred\_driver\_init}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{deferred\_driver\_init()}{deferred\_driver\_init()}}
+{\footnotesize\ttfamily static esp\+\_\+err\+\_\+t deferred\+\_\+driver\+\_\+init (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Отложенная инициализация драйвера освещения. Вызывается после того, как Zigbee стек сообщил об успешном старте устройства. 
+
+\begin{DoxyReturn}{Returns}
+Всегда ESP\+\_\+\+OK (упрощённо; в реальном драйвере может быть ошибка). 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00049}{49}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{servo__driver_8c_a0b3ad5bd54de51c1dd1cfefd6bd5533e}{servo\_driver\_init}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ ESP\_OK;}
+\DoxyCodeLine{00053\ \}}
+
+\end{DoxyCode}
+\Hypertarget{esp__zb__window__control_8c_a8d77d98462eb51ae5bad45c1198c195f}\label{esp__zb__window__control_8c_a8d77d98462eb51ae5bad45c1198c195f} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!esp\_zb\_app\_signal\_handler@{esp\_zb\_app\_signal\_handler}}
+\index{esp\_zb\_app\_signal\_handler@{esp\_zb\_app\_signal\_handler}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{esp\_zb\_app\_signal\_handler()}{esp\_zb\_app\_signal\_handler()}}
+{\footnotesize\ttfamily void esp\+\_\+zb\+\_\+app\+\_\+signal\+\_\+handler (\begin{DoxyParamCaption}\item[{esp\+\_\+zb\+\_\+app\+\_\+signal\+\_\+t \texorpdfstring{$\ast$}{*}}]{signal\+\_\+struct }\end{DoxyParamCaption})}
+
+
+
+Главный обработчик сигналов (событий) Zigbee стека. Регистрируется автоматически при инициализации; вызывается при изменении состояния сети, комиссионировании и т.\+д. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signal\+\_\+struct} & Структура, содержащая тип сигнала и статус ошибки. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00072}{72}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00073\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ Указатель\ на\ код\ сигнала\ (uint32\_t)}}
+\DoxyCodeLine{00075\ \ \ \ \ uint32\_t\ *p\_sg\_p\ \ \ \ \ \ \ =\ signal\_struct-\/>p\_app\_signal;}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ Статус\ выполнения\ последней\ операции}}
+\DoxyCodeLine{00077\ \ \ \ \ esp\_err\_t\ err\_status\ =\ signal\_struct-\/>esp\_err\_status;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ Тип\ сигнала\ (получаем\ разыменованием\ указателя)}}
+\DoxyCodeLine{00079\ \ \ \ \ esp\_zb\_app\_signal\_type\_t\ sig\_type\ =\ *p\_sg\_p;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordflow}{switch}\ (sig\_type)\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ Сигнал,\ генерируемый\ ZDO\ (Zigbee\ Device\ Object)\ при\ пропуске\ нормального\ запуска.}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Указывает,\ что\ нужно\ самостоятельно\ инициализировать\ стек.}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_ZB\_ZDO\_SIGNAL\_SKIP\_STARTUP:}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Запускаем\ начальную\ инициализацию\ (считывание\ сетевых\ параметров\ из\ NVS\ и\ т.п.)}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Initialize\ Zigbee\ stack"{}});}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ esp\_zb\_bdb\_start\_top\_level\_commissioning(ESP\_ZB\_BDB\_MODE\_INITIALIZATION);}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ Сигнал\ первого\ запуска\ устройства\ (чистый\ flash)\ или\ перезагрузки\ после\ сохранения\ сети.}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_ZB\_BDB\_SIGNAL\_DEVICE\_FIRST\_START:}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_ZB\_BDB\_SIGNAL\_DEVICE\_REBOOT:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\_status\ ==\ ESP\_OK)\ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Инициализируем\ драйвер\ лампы\ }}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Deferred\ driver\ initialization\ \%s"{}},\ \mbox{\hyperlink{esp__zb__window__control_8c_aec58b5da611b5e0e3f7492352ac9e975}{deferred\_driver\_init}}()\ ?\ \textcolor{stringliteral}{"{}failed"{}}\ :\ \textcolor{stringliteral}{"{}successful"{}});}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Device\ started\ up\ in\ \%s\ factory-\/reset\ mode"{}},\ esp\_zb\_bdb\_is\_factory\_new()\ ?\ \textcolor{stringliteral}{"{}"{}}\ :\ \textcolor{stringliteral}{"{}non"{}});}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Проверяем,\ является\ ли\ устройство\ "{}заводски\ новым"{}\ (нет\ сохранённой\ сети)}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (esp\_zb\_bdb\_is\_factory\_new())\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Start\ network\ steering"{}});}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Запускаем\ поиск\ и\ присоединение\ к\ существующей\ Zigbee-\/сети\ (Network\ Steering)}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ esp\_zb\_bdb\_start\_top\_level\_commissioning(ESP\_ZB\_BDB\_MODE\_NETWORK\_STEERING);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Device\ rebooted"{}});}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Устройство\ уже\ было\ в\ сети,\ просто\ перезагрузилось;\ никаких\ дополнительных\ действий\ не\ требуется.}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ошибка\ на\ этапе\ инициализации\ Zigbee\ стека}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ commissioning\ failed\ */}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGW(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Failed\ to\ initialize\ Zigbee\ stack\ (status:\ \%s)"{}},\ esp\_err\_to\_name(err\_status));}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{comment}{//\ Сигнал,\ завершающий\ процесс\ Network\ Steering\ (удачный\ или\ нет)}}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_ZB\_BDB\_SIGNAL\_STEERING:}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\_status\ ==\ ESP\_OK)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Успешное\ присоединение\ к\ сети\ –\ выводим\ информацию\ о\ параметрах\ сети}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ esp\_zb\_ieee\_addr\_t\ extended\_pan\_id;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ esp\_zb\_get\_extended\_pan\_id(extended\_pan\_id);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Joined\ network\ successfully\ (Extended\ PAN\ ID:\ \%02x:\%02x:\%02x:\%02x:\%02x:\%02x:\%02x:\%02x,\ PAN\ ID:\ 0x\%04hx,\ Channel:\%d,\ Short\ Address:\ 0x\%04hx)"{}},}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extended\_pan\_id[7],\ extended\_pan\_id[6],\ extended\_pan\_id[5],\ extended\_pan\_id[4],}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ extended\_pan\_id[3],\ extended\_pan\_id[2],\ extended\_pan\_id[1],\ extended\_pan\_id[0],}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ esp\_zb\_get\_pan\_id(),\ esp\_zb\_get\_current\_channel(),\ esp\_zb\_get\_short\_address());}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Присоединение\ не\ удалось\ –\ планируем\ повтор\ через\ 1\ секунду\ (1000\ мс)}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Network\ steering\ was\ not\ successful\ (status:\ \%s)"{}},\ esp\_err\_to\_name(err\_status));}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ esp\_zb\_scheduler\_alarm((esp\_zb\_callback\_t)\mbox{\hyperlink{esp__zb__window__control_8c_a455f38ce1e4241e576dc67dab2d6b674}{bdb\_start\_top\_level\_commissioning\_cb}},\ ESP\_ZB\_BDB\_MODE\_NETWORK\_STEERING,\ 1000);}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}ZDO\ signal:\ \%s\ (0x\%x),\ status:\ \%s"{}},\ esp\_zb\_zdo\_signal\_to\_string(sig\_type),\ sig\_type,}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ esp\_err\_to\_name(err\_status));}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00130\ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \}}
+
+\end{DoxyCode}
+\Hypertarget{esp__zb__window__control_8c_a2dc519d60ebab8d2cd598bbc436b9cc1}\label{esp__zb__window__control_8c_a2dc519d60ebab8d2cd598bbc436b9cc1} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!esp\_zb\_task@{esp\_zb\_task}}
+\index{esp\_zb\_task@{esp\_zb\_task}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{esp\_zb\_task()}{esp\_zb\_task()}}
+{\footnotesize\ttfamily static void esp\+\_\+zb\+\_\+task (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{pv\+Parameters }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Задача Free\+RTOS, в которой работает весь Zigbee стек. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pv\+Parameters} & Не используется. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00206}{206}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00207\ \{}
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{comment}{/*\ initialize\ Zigbee\ stack\ */}}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{/*\ 1.\ Инициализация\ стека\ Zigbee\ с\ конфигурацией\ End\ Device\ (ZED)\ */}}
+\DoxyCodeLine{00210\ \ \ \ \ esp\_zb\_cfg\_t\ zb\_nwk\_cfg\ =\ \mbox{\hyperlink{esp__zb__window__control_8h_a5bd1876e4cb8b0b131f8da344bacc3da}{ESP\_ZB\_ZED\_CONFIG}}();}
+\DoxyCodeLine{00211\ \ \ \ \ esp\_zb\_init(\&zb\_nwk\_cfg);}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{comment}{/*\ 2.\ Создание\ конечной\ точки\ (endpoint)}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ Макрос\ ESP\_ZB\_DEFAULT\_WINDOW\_COVERING\_CONFIG\ предоставляет\ стандартные\ настройки:}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ -\/\ Включает\ кластеры:\ Basic,\ Identify,\ Groups,\ Scenes,\ On/off.}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ esp\_zb\_window\_covering\_cfg\_t\ window\_covering\_cfg\ =\ ESP\_ZB\_DEFAULT\_WINDOW\_COVERING\_CONFIG()\ \ ;}
+\DoxyCodeLine{00218\ \ \ \ \ window\_covering\_cfg.window\_cfg.covering\_type\ =\ 0x00;\ }
+\DoxyCodeLine{00219\ \ \ \ \ esp\_zb\_ep\_list\_t\ *esp\_zb\_window\_covering\_ep\ =\ esp\_zb\_window\_covering\_ep\_create(\mbox{\hyperlink{esp__zb__window__control_8h_a409635d19ecc58467871ad941618868a}{HA\_ESP\_WINDOW\_COVEWRING\_ENDPOINT}}\ ,\ \&window\_covering\_cfg);}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{/*\ 3.\ Добавление\ пользовательской\ информации\ о\ производителе\ и\ модели\ в\ кластер\ Basic\ */}}
+\DoxyCodeLine{00221\ \ \ \ \ zcl\_basic\_manufacturer\_info\_t\ info\ =\ \{}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ .manufacturer\_name\ =\ \mbox{\hyperlink{esp__zb__window__control_8h_a982315420885ad33c55224352cd5afdf}{ESP\_MANUFACTURER\_NAME}},}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ .model\_identifier\ =\ \mbox{\hyperlink{esp__zb__window__control_8h_a6f2178b5cd3485319c410131ea1bf512}{ESP\_MODEL\_IDENTIFIER}},}
+\DoxyCodeLine{00224\ \ \ \ \ \};}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ esp\_zcl\_utility\_add\_ep\_basic\_manufacturer\_info(esp\_zb\_window\_covering\_ep,\ \mbox{\hyperlink{esp__zb__window__control_8h_a409635d19ecc58467871ad941618868a}{HA\_ESP\_WINDOW\_COVEWRING\_ENDPOINT}},\ \&info);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{comment}{/*\ 4.\ Регистрация\ созданного\ endpoint'а\ в\ Zigbee\ стеке\ */}}
+\DoxyCodeLine{00229\ \ \ \ \ esp\_zb\_device\_register(esp\_zb\_window\_covering\_ep);}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{comment}{/*\ 5.\ Регистрация\ единого\ обработчика\ всех\ действий\ (callback)\ */}}
+\DoxyCodeLine{00232\ \ \ \ \ esp\_zb\_core\_action\_handler\_register(\mbox{\hyperlink{esp__zb__window__control_8c_ab9dcf11833c207d5411024fb85c980ce}{zb\_action\_handler}});}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{comment}{/*\ 6.\ Установка\ маски\ первичных\ каналов\ (например,\ все\ каналы)\ */}}
+\DoxyCodeLine{00235\ \ \ \ \ esp\_zb\_set\_primary\_network\_channel\_set(\mbox{\hyperlink{esp__zb__window__control_8h_a6eda4dce1a293edb2249aaa552bf24ab}{ESP\_ZB\_PRIMARY\_CHANNEL\_MASK}});}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{/*\ 7.\ Запуск\ Zigbee\ стека.}}
+\DoxyCodeLine{00238\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ Параметр\ false\ означает,\ что\ BDB\ commissioning\ не\ стартует\ автоматически,}}
+\DoxyCodeLine{00239\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ а\ будет\ запущен\ позже\ через\ сигналы\ (ESP\_ZB\_ZDO\_SIGNAL\_SKIP\_STARTUP).}}
+\DoxyCodeLine{00240\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00241\ \ \ \ \ ESP\_ERROR\_CHECK(esp\_zb\_start(\textcolor{keyword}{false}));}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{/*\ 8.\ Вход\ в\ бесконечный\ цикл\ обработки\ событий\ стека\ (никогда\ не\ возвращает\ управление)\ */}}
+\DoxyCodeLine{00244\ \ \ \ \ esp\_zb\_stack\_main\_loop();}
+\DoxyCodeLine{00245\ \}}
+
+\end{DoxyCode}
+\Hypertarget{esp__zb__window__control_8c_ab9dcf11833c207d5411024fb85c980ce}\label{esp__zb__window__control_8c_ab9dcf11833c207d5411024fb85c980ce} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!zb\_action\_handler@{zb\_action\_handler}}
+\index{zb\_action\_handler@{zb\_action\_handler}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{zb\_action\_handler()}{zb\_action\_handler()}}
+{\footnotesize\ttfamily static esp\+\_\+err\+\_\+t zb\+\_\+action\+\_\+handler (\begin{DoxyParamCaption}\item[{esp\+\_\+zb\+\_\+core\+\_\+action\+\_\+callback\+\_\+id\+\_\+t}]{callback\+\_\+id,  }\item[{const void \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Диспетчер действий (action handler) для всех callback-\/событий Zigbee Core. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback\+\_\+id} & Идентификатор типа действия (например, установка атрибута, запрос на чтение и др.) \\
+\hline
+{\em message} & Указатель на данные, связанные с действием. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ESP\+\_\+\+OK или ошибка. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00182}{182}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00183\ \{}
+\DoxyCodeLine{00184\ \ \ \ \ esp\_err\_t\ ret\ =\ ESP\_OK;}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keywordflow}{switch}\ (callback\_id)\ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_ZB\_CORE\_SET\_ATTR\_VALUE\_CB\_ID:}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Пришла\ команда\ на\ изменение\ атрибута\ –\ передаём\ в\ специализированный\ обработчик}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ ret\ =\ \mbox{\hyperlink{esp__zb__window__control_8c_ad4e8386186e0759d2fc336c78d02c8a6}{zb\_attribute\_handler}}((esp\_zb\_zcl\_window\_covering\_movement\_message\_t\ *)message);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordflow}{case}\ ESP\_ZB\_CORE\_WINDOW\_COVERING\_MOVEMENT\_CB\_ID:\ \ \textcolor{comment}{//\ 0x30\ -\/\ получена\ команда}}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Обработка\ принятых\ команд\ (включая\ команды\ для\ window\ covering)}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ ret\ =\ \mbox{\hyperlink{esp__zb__window__control_8c_ad4e8386186e0759d2fc336c78d02c8a6}{zb\_attribute\_handler}}((esp\_zb\_zcl\_window\_covering\_movement\_message\_t\ *)message);}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Другие\ типы\ callback\ (например,\ чтение\ атрибута,\ команда)\ –\ просто\ логируем}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ ESP\_LOGW(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Receive\ Zigbee\ action(0x\%x)\ callback"{}},\ callback\_id);}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00198\ \ \ \ \ \}}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{00200\ \}}
+
+\end{DoxyCode}
+\Hypertarget{esp__zb__window__control_8c_ad4e8386186e0759d2fc336c78d02c8a6}\label{esp__zb__window__control_8c_ad4e8386186e0759d2fc336c78d02c8a6} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!zb\_attribute\_handler@{zb\_attribute\_handler}}
+\index{zb\_attribute\_handler@{zb\_attribute\_handler}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{zb\_attribute\_handler()}{zb\_attribute\_handler()}}
+{\footnotesize\ttfamily static esp\+\_\+err\+\_\+t zb\+\_\+attribute\+\_\+handler (\begin{DoxyParamCaption}\item[{const esp\+\_\+zb\+\_\+zcl\+\_\+window\+\_\+covering\+\_\+movement\+\_\+message\+\_\+t \texorpdfstring{$\ast$}{*}}]{message }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Обработчик события изменения атрибута (Set Attribute Value). Вызывается, когда координатор или другое устройство записывает значение в атрибут нашего кластера. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Указатель на структуру сообщения об изменении атрибута. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ESP\+\_\+\+OK при успешной обработке, иначе код ошибки. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00140}{140}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00141\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ esp\_err\_t\ ret\ =\ ESP\_OK;}
+\DoxyCodeLine{00143\ \ \ \ \ ESP\_RETURN\_ON\_FALSE(message,\ ESP\_FAIL,\ \mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Empty\ message"{}});}
+\DoxyCodeLine{00144\ \ \ \ \ ESP\_RETURN\_ON\_FALSE(message-\/>info.status\ ==\ ESP\_ZB\_ZCL\_STATUS\_SUCCESS,\ ESP\_ERR\_INVALID\_ARG,\ \mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Error\ status(\%d)"{}},\ message-\/>info.status);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Received:\ cluster\ 0x\%x,\ command\ 0x\%x,\ data\ size\ \%d"{}},\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ message-\/>info.cluster,\ message-\/>command,\ message-\/>payload.lift\_value);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordflow}{if}\ (message-\/>info.dst\_endpoint\ ==\ \mbox{\hyperlink{esp__zb__window__control_8h_a409635d19ecc58467871ad941618868a}{HA\_ESP\_WINDOW\_COVEWRING\_ENDPOINT}})\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (message-\/>info.cluster\ ==\ ESP\_ZB\_ZCL\_CLUSTER\_ID\_WINDOW\_COVERING)\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (message-\/>command)\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x02:\ \ \ \textcolor{comment}{//\ открыть}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Open\ command:\ both\ servos\ open\ sequentially"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{servo__driver_8c_aa5633225f635553c3ec1bc1fe38b4ff2}{servo\_driver\_open\_both\_sequential}}();}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x01:\ \ \ \textcolor{comment}{//\ закрыть}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Close\ command:\ both\ servos\ close\ sequentially"{}});}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{servo__driver_8c_ae1887604bf1e1c8eea433026d29250a5}{servo\_driver\_close\_both\_sequential}}();}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0x05:\ \ \ \textcolor{comment}{//\ открыть\ на\ процент}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGI(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Move\ to\ \%d\%\%:\ Servo1\ full\ open,\ Servo2\ to\ percent"{}},\ message-\/>payload.lift\_value);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{servo__driver_8c_ac34265542bd1510c2541291a9d06e679}{servo\_driver\_move\_with\_percentage}}(message-\/>payload.lift\_value);}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ESP\_LOGW(\mbox{\hyperlink{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}{TAG}},\ \textcolor{stringliteral}{"{}Unknown\ command:\ 0x\%x"{}},\ message-\/>command);}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordflow}{return}\ ret;}
+\DoxyCodeLine{00174\ \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c}\label{esp__zb__window__control_8c_a5a85b9c772bbeb480b209a3e6ea92b4c} 
+\index{esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}!TAG@{TAG}}
+\index{TAG@{TAG}!esp\_zb\_window\_control.c@{esp\_zb\_window\_control.c}}
+\doxysubsubsection{\texorpdfstring{TAG}{TAG}}
+{\footnotesize\ttfamily const char\texorpdfstring{$\ast$}{*} TAG = "{}HA\+\_\+\+ESP\+\_\+\+WINDOW\+\_\+\+COVEWRING"{}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Definition at line \mbox{\hyperlink{esp__zb__window__control_8c_source_l00038}{38}} of file \mbox{\hyperlink{esp__zb__window__control_8c_source}{esp\+\_\+zb\+\_\+window\+\_\+control.\+c}}.
+

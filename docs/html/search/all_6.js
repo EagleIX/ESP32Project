@@ -1,0 +1,27 @@
+var searchData=
+[
+  ['s_5fchannel_5fcount_0',['s_channel_count',['../servo__driver_8c.html#afa189b7bbf7b07cee08fe78cc36b3045',1,'servo_driver.c']]],
+  ['s_5fis_5finitialized_1',['s_is_initialized',['../servo__driver_8c.html#ac576f774ee93ff7a2fe7ab44e55d2451',1,'servo_driver.c']]],
+  ['s_5fservo1_5fch_2',['s_servo1_ch',['../servo__driver_8c.html#a9b8e3ea793913cc2828762941bcff80d',1,'servo_driver.c']]],
+  ['s_5fservo2_5fch_3',['s_servo2_ch',['../servo__driver_8c.html#aee454cec4666faed912be7354b2134ce',1,'servo_driver.c']]],
+  ['s_5fspeed_5fmode_4',['s_speed_mode',['../servo__driver_8c.html#a61971997220b467fc8f8908e5793cc48',1,'servo_driver.c']]],
+  ['servo1_5fgpio_5',['SERVO1_GPIO',['../servo__driver_8c.html#a55d27b42e4621eb26191cc7b28f412bc',1,'servo_driver.c']]],
+  ['servo2_5fgpio_6',['SERVO2_GPIO',['../servo__driver_8c.html#ad8eb9c087b87670d344bb14b1556e68c',1,'servo_driver.c']]],
+  ['servo_5fdriver_2ec_7',['servo_driver.c',['../servo__driver_8c.html',1,'']]],
+  ['servo_5fdriver_2eh_8',['servo_driver.h',['../servo__driver_8h.html',1,'']]],
+  ['servo_5fdriver_5fclose_5fboth_5fsequential_9',['servo_driver_close_both_sequential',['../servo__driver_8c.html#ae1887604bf1e1c8eea433026d29250a5',1,'servo_driver_close_both_sequential(void):&#160;servo_driver.c'],['../servo__driver_8h.html#ae1887604bf1e1c8eea433026d29250a5',1,'servo_driver_close_both_sequential(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fclose_5ffirst_10',['servo_driver_close_first',['../servo__driver_8c.html#ac093690135c88a0e6f5f385bee5168dd',1,'servo_driver_close_first(void):&#160;servo_driver.c'],['../servo__driver_8h.html#ac093690135c88a0e6f5f385bee5168dd',1,'servo_driver_close_first(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fclose_5fsecond_11',['servo_driver_close_second',['../servo__driver_8c.html#a65407e16abd29c924aa6c879c72f4bc6',1,'servo_driver_close_second(void):&#160;servo_driver.c'],['../servo__driver_8h.html#a65407e16abd29c924aa6c879c72f4bc6',1,'servo_driver_close_second(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5finit_12',['servo_driver_init',['../servo__driver_8c.html#a0b3ad5bd54de51c1dd1cfefd6bd5533e',1,'servo_driver_init(void):&#160;servo_driver.c'],['../servo__driver_8h.html#a0b3ad5bd54de51c1dd1cfefd6bd5533e',1,'servo_driver_init(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fmove_5fwith_5fpercentage_13',['servo_driver_move_with_percentage',['../servo__driver_8c.html#ac34265542bd1510c2541291a9d06e679',1,'servo_driver_move_with_percentage(uint8_t percent):&#160;servo_driver.c'],['../servo__driver_8h.html#ac34265542bd1510c2541291a9d06e679',1,'servo_driver_move_with_percentage(uint8_t percent):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fopen_5fboth_5fsequential_14',['servo_driver_open_both_sequential',['../servo__driver_8c.html#aa5633225f635553c3ec1bc1fe38b4ff2',1,'servo_driver_open_both_sequential(void):&#160;servo_driver.c'],['../servo__driver_8h.html#aa5633225f635553c3ec1bc1fe38b4ff2',1,'servo_driver_open_both_sequential(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fopen_5ffirst_15',['servo_driver_open_first',['../servo__driver_8c.html#a5287e1c285dfe8f5b23ed55abed64fb7',1,'servo_driver_open_first(void):&#160;servo_driver.c'],['../servo__driver_8h.html#a5287e1c285dfe8f5b23ed55abed64fb7',1,'servo_driver_open_first(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fopen_5fsecond_16',['servo_driver_open_second',['../servo__driver_8c.html#a7fb53356f0cd457614d2e090d145fd35',1,'servo_driver_open_second(void):&#160;servo_driver.c'],['../servo__driver_8h.html#a7fb53356f0cd457614d2e090d145fd35',1,'servo_driver_open_second(void):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fset_5fangle_17',['servo_driver_set_angle',['../servo__driver_8c.html#a5817d92d6da09f54990d44b439597bda',1,'servo_driver_set_angle(uint8_t servo_id, float angle):&#160;servo_driver.c'],['../servo__driver_8h.html#a5817d92d6da09f54990d44b439597bda',1,'servo_driver_set_angle(uint8_t servo_id, float angle):&#160;servo_driver.c']]],
+  ['servo_5fdriver_5fset_5fsecond_5fpercentage_18',['servo_driver_set_second_percentage',['../servo__driver_8c.html#a3ae0aa597a5e3c7b54bc46c332901a9e',1,'servo_driver_set_second_percentage(uint8_t percent):&#160;servo_driver.c'],['../servo__driver_8h.html#a3ae0aa597a5e3c7b54bc46c332901a9e',1,'servo_driver_set_second_percentage(uint8_t percent):&#160;servo_driver.c']]],
+  ['servo_5ffreq_5fhz_19',['SERVO_FREQ_HZ',['../servo__driver_8c.html#aaa7c5c7973c5f196d707256aed5dbbb2',1,'servo_driver.c']]],
+  ['servo_5fmax_5fangle_20',['SERVO_MAX_ANGLE',['../servo__driver_8c.html#a546558e3ca760d619e3544e8dafe5ba0',1,'servo_driver.c']]],
+  ['servo_5fmax_5fpulse_5fus_21',['SERVO_MAX_PULSE_US',['../servo__driver_8c.html#ad1fd3164150a73e22d4a9e870cdb4731',1,'servo_driver.c']]],
+  ['servo_5fmin_5fpulse_5fus_22',['SERVO_MIN_PULSE_US',['../servo__driver_8c.html#a474f2012d6528c25168fae40ba3c7190',1,'servo_driver.c']]],
+  ['servo_5fmove_5fdelay_5fms_23',['SERVO_MOVE_DELAY_MS',['../servo__driver_8c.html#af56cfb810086147e73c58e5c49945d5f',1,'servo_driver.c']]]
+];

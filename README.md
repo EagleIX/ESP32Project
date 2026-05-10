@@ -3,6 +3,49 @@
 
 Проект реализует управление "умной" оконной ручкой (делали на базе кластера ESP Window Covering, для того, чтобы можно было управлять устройством из приложения Умный Дом от яндекса) на базе микроконтроллера **ESP32-C6** с использованием стека **Zigbee (ZCL)** и двух сервоприводов. Устройство работает как Zigbee End Device, управляя положением окна по командам из Zigbee-сети.
 
+<div align="center">
+  <table>
+    <table>
+      <tr>
+        <td align="center"><img src="assets/demo1.gif" alt="Демонстрация работы" width="400"></td>
+        <td align="center"><img src="assets/demo0.gif" alt="Демонстрация работы 2" width="400"></td>
+      </tr>
+    </table>
+  </table>
+</div>
+
+<div align="center">
+<div align="center">
+  <p>
+    <img src="assets/IMG_4254.PNG" width="250">
+    <img src="assets/IMG_4255.PNG" width="250">
+    <img src="assets/IMG_4256.PNG" width="250">
+  </p>
+</div>
+  
+  <p align="center">
+    <em> Устройство автоматически определяется в Zigbee-сети как стандартное устройство экосистемы <strong>Умного Дома Яндекса</strong><br>
+    и полноценно работает с умными колонками, поддерживающими Zigbee-протокол</em>
+  </p>
+</div>
+
+
+## Техническая документация
+
+Проект разработан в соответствии с принципами документирования промышленного уровня.  
+
+> Документация автоматически поддерживается в актуальном состоянии через Doxygen и доступна в виде статического сайта и охватывает все аспекты работы с прошивкой: от инициализации периферии до обработки событий ZigBee.
+
+
+
+
+<div align="center">
+  <a href="https://eagleix.github.io/ESP32Project/" style="display: inline-block; padding: 12px 24px; background-color: #2c3e50; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-family: sans-serif;"> Документация нашего проекта</a>
+</div>
+
+
+
+
 ## Почему esp-idf:
 
 Официальный Zigbee-стек — Arduino не имеет встроенной поддержки Zigbee, особенно на ESP32-C6. Придётся использовать сырые форки. ESP-IDF даёт сертифицированный esp-zigbee-sdk от Espressif с кластером Window Covering — работает с любым координатором (ZHA, Zigbee2MQTT, Hue) без плясок.
@@ -11,7 +54,9 @@
 
 Отладка как у взрослых — паника с сохранением стека, монитор задач, трассировка Zigbee, heap poisoning, watchdogs. Arduino ответит просто перезагрузкой — ищите причину в чёрном ящике.
 
-Коротко: Arduino — для мигания светодиодом на столе. ESP-IDF — для устройства, которое живёт в вашей сети месяцами, не зависает, не жрёт батарейку и не позорит вас перед домашними, когда окно не закрывается. Вот и думайте
+Коротко: Arduino — для мигания светодиодом на столе. ESP-IDF — для устройства, которое живёт в вашей сети месяцами, не зависает, не жрёт батарейку и не позорит вас перед домашними, когда окно не закрывается.
+
+Вот и думайте
 
 ## Требования
 
@@ -80,7 +125,7 @@ get_idf
 1. **Клонируйте репозиторий проекта**:
    ```bash
    git clone https://github.com/EagleIX/ESP32Project
-   cd HA_ZB_Project
+   cd HA_Window_Control
    ```
 
 2. **Активируйте окружение ESP-IDF**:
@@ -105,7 +150,7 @@ get_idf
 
 ## Прошивка и мониторинг
 
-### Linux / macOS / WSL (прямое подключение)
+### Linux / macOS (прямое подключение)
 
 1. Подключите ESP32-C6 через USB. Узнайте имя порта (например, `/dev/ttyUSB0`, `/dev/ttyACM0`):
    ```bash
@@ -184,12 +229,11 @@ idf.py -p /dev/ttyUSB0 flash
 ## Структура проекта
 
 ```
-WindowCovering_sample/
-├── HA_Window_covering/           
+WindowControl_sample/ HA_Window_control/           
 ├── main/                         # Основной код приложения
 │   ├── CMakeLists.txt
-│   ├── esp_zb_window_covering.c  # Zigbee кластер Window Covering
-│   ├── esp_zb_window_covering.h
+│   ├── esp_zb_window_control.c  # Zigbee кластер 
+│   ├── esp_zb_window_control.h
 │   ├── idf_component.yml         # Зависимости компонента main
 │   ├── servo_driver.c            # Драйвер сервоприводов
 │   └── servo_driver.h

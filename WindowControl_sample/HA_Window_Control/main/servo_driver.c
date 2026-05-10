@@ -18,7 +18,7 @@ static const char *TAG = "SERVO_DRV";
 #define SERVO_MOVE_DELAY_MS 500
 
 static bool s_is_initialized = false;
-static ledc_mode_t s_speed_mode = LEDC_LOW_SPEED_MODE;
+static ledc_mode_t s_speed_mode = LEDC_LOW_SPEED_MODE;         
 static uint8_t s_channel_count = 2;
 static uint8_t s_servo1_ch = 0;   // канал для первого серво
 static uint8_t s_servo2_ch = 1;   // канал для второго серво
